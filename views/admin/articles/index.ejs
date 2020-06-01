@@ -1,0 +1,48 @@
+<%- include("../../partials/head.ejs") %>
+<%- include("../../partials/navbar.ejs") %>
+<div class="container">
+    <hr>
+    <h2>Artigos</h2>
+    <a class="btn btn-success" href="articles/new">Criar novo artigo</a>
+    <hr>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Título</th>
+                <th>Slug</th>
+                <th>Categoria</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% articles.forEach(article => { %>
+                <tr>
+                    <td><%= article.id %></td>
+                    <td><%= article.title %></td>
+                    <td><%= article.slug %></td>
+                    <td><%= article.category.title %></td>
+                    <td>
+                        <form method="POST" action="/articles/delete" onsubmit="confirmarDelecao(event, this)" style="display: inline;">
+                            <input type="hidden" name="id" value="<%= article.id %>">
+                            <button class="btn btn-danger">Deletar</butto>
+                        </form>
+                    </td>
+                </tr>
+                
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+<%- include("../../partials/footer.ejs") %>
+<script>
+    function confirmarDelecao(event, form){
+        event.preventDefault();
+        var decision = confirm("Você quer deletar este artigo?");
+        if(decision){
+            form.submit()
+        } else {
+            console.log("não quero deletar")
+        }
+    }
+</script>

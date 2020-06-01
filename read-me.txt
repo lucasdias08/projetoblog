@@ -1,0 +1,51 @@
+npm install --save slugify --> biblioteca do NodeJS para transformar strings em slug's
+
+tinymce -> Editor de texto que utiliza JavaScript para controlar um <textarea> e deix�-lo parecido com ms word 
+	https://www.tiny.cloud/get-tiny/self-hosted/
+	baixa > extra para a public do projeto  > usa o importa o js para a pag
+	abre outro script > tinymce.init{( selector: "<idTag>" )} 
+
+	https://www.tiny.cloud/get-tiny/language-packages/ 
+	extrai para a pasta "lang" o script da linguagem
+	language: "<nome idiota baixado>"
+
+<%- objeto.atributo %> --> o hifen instrui o ejs a renderizar o html 
+
+<model>.findAndCountAll({   --> comando para procurar com COUNT; limit dá o máximo (útil para paginação); offset serve para escolhermos a partir de qual
+        limit: 1,
+        offset: 0
+    }).then(articles => {
+        res.json(articles)
+    })
+
+hash de senha --> parecido com a criptografia, mas não é possivel decifrar, igual a descriptografação.
+	npm install --save bcryptjs
+
+cookies -> arquivo de texto muito simple, cuja composição depende do conteúdo do endereço web visitado. A maioria dos sites armazenam informações básicas para auxiliar e agilizar a navegação, evitando repetições de dados do clien-side.
+sessions --> parece muito com os cookies, mas esses são salvos no server-side. Cookies são referencias das sessions.
+	npm install --save express-session --> biblioteca para uso e manipulação de sessions no nodejs
+
+	//configurar uso de sessions e cookie com tempo em milsegundos
+	app.use(session({
+    	secret: "qualquercoisa", cookie: { maxAge: 30000 } 
+	}));
+
+	app.get("/session", (req, res) => {
+		req.session.treinamento = "Formação NodeJs";    
+		req.session.ano = 2019;
+		req.session.email = "Luqueta";
+		res.send("Sessão gerada");
+	});
+
+	app.get("/leitura", (req, res) => {
+		res.json({
+		treinamento: req.session.treinamento,
+		ano: req.session.ano,
+		email: req.session.email
+		})
+	});
+
+
+redis --> banco de dados especifico para a persistência de dados de cache e session, para que não fique sobrecarregada a memória
+
+Middleware --> softwares com papel de conectar aplicações, usuários e dados.
